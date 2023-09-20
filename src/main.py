@@ -1,6 +1,8 @@
 from sys import argv
 import json
 
+from bot import client
+
 if len(argv) < 2:
     raise Exception('No config provided')
 
@@ -11,4 +13,5 @@ if 'token' not in config:
     raise Exception('No token')
 
 token = config['token']
-print(token)
+
+client.run(token)

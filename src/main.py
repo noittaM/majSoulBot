@@ -13,11 +13,11 @@ if len(argv) < 2:
 config_path = argv[1]
 config = json.load(open(config_path, "r"))
 
-match (config['token'], os.environ.get('BOT_TOKEN')):
-    case (None, has_value):
-        token = os.environ.get('BOT_TOKEN')
-    case (has_value, _):
-        token = config['token']
+match (config.get['token'], os.environ.get('BOT_TOKEN')):
+    case (None, env_token):
+        token = env_token
+    case (conf_token, _):
+        token = conf_token
     case (_,_):
         Exception('No token')
     

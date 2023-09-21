@@ -19,6 +19,6 @@ match (config.get['token'], os.environ.get('BOT_TOKEN')):
     case (conf_token, _):
         token = conf_token
     case (_,_):
-        Exception('No token')
+      raise Exception('No token')
     
 client.run(token)

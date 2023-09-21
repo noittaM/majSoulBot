@@ -13,10 +13,12 @@ if len(argv) < 2:
 config_path = argv[1]
 config = json.load(open(config_path, "r"))
 
-if 'token' not in config:
-    #raise Exception('No token') isn't the point of this is that the program keeps running even after running into a problem?
-    token = os.environ.get('BOT_TOKEN')
-else:
-    token = config['token']
-
+match (config['token'], os.environ.get('BOT_TOKEN')):
+    case (None, has_value):
+        token = os.environ.get('BOT_TOKEN')
+    case (has_value, _):
+        token = config['token']
+    case (_,_):
+        Exception('No token')
+    
 client.run(token)

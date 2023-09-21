@@ -13,7 +13,7 @@ if len(argv) < 2:
 config_path = argv[1]
 config = json.load(open(config_path, "r"))
 
-match (config.get['token'], os.environ.get('BOT_TOKEN')):
+match (config.get('token'), os.environ.get('BOT_TOKEN')):
     case (None, env_token):
         token = env_token
     case (conf_token, _):

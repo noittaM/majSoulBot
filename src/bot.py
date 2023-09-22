@@ -10,16 +10,29 @@ client = discord.Client(intents=intents)
 async def on_ready():
     print(f'logged in as {client.user}')
 
-@client.event
+
 async def evalute(message):
-    await message.channel.send('type in the first number')
-    if message.content.startswith('$'):
-        number1=message.content
-        await message.channel.send('type in the second number')
-        if message.content.startswith('$'):
-            number2=message.content
-    message.channel.send("the first number is " + number1 + "and the second is "+ number2)
-    
+    userID=message.author
+    msg_channel= message.channel
+    await msg_channel.send('type in the first number, ' + str(userID))
+
+    while True:
+        msg = await client.wait_for('message')
+        if  msg.author == userID:
+            break
+    number1= msg.content
+
+    await msg_channel.send('type in the second number, ' + str(userID))
+
+    while True:
+        msg = await client.wait_for('message')
+        if  msg.author == userID:
+            break
+    number2=msg.content
+
+    await msg_channel.send(int(number1) + int(number2))     #should make sure that the numbers are ints but can't be bothered rn
+    await msg_channel.send("the first number is " + number1 + " and the second is "+ number2)
+    await msg_channel.send(msg_channel)
 
 
 

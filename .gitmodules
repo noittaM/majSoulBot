@@ -1,0 +1,3 @@
+[submodule "src/src/PyMajSoul"]
+	path = src/src/PyMajSoul
+	url = https://github.com/chaserhkj/PyMajSoul
